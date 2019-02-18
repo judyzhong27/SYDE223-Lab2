@@ -131,8 +131,10 @@ bool DronesManager::remove(unsigned int index) {
 
 bool DronesManager::remove_front() {
 
-  DroneRecord* curr = front;
-	return false;
+  DroneRecord* curr = front->next;
+  delete curr->prev;
+  curr->prev = NULL;
+	return true;
 }
 
 bool DronesManager::remove_back() {
