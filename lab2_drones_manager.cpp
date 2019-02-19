@@ -153,16 +153,20 @@ bool DronesManager::replace(unsigned int index, DroneRecord value) {
       curr = curr->next;
     }
     new_value->prev = curr->prev;
-    new_value->next = curr->next;
-    curr->prev->next = new_value;
-    curr->next->prev = new_value;
+    new_value->next = curr->next;    
     delete curr;
     curr = NULL;
     if (index == 0){
       first = new_value;
+      curr->next->prev = new_value;
     }
     else if(index == size-1){
       last = new_value;
+      curr->prev->next = new_value;
+    }
+    else{
+      curr->prev->next = new_value;
+      curr->next->prev = new_value;
     }
   }
   return true;
