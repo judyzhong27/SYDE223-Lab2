@@ -143,16 +143,19 @@ bool DronesManager::remove_back() {
 }
 
 bool DronesManager::replace(unsigned int index, DroneRecord value) {
-  if(index <= 0 || index >= size){
+if(index <= 0 || index >= size){
     return false;
   }
   else{
     DroneRecord* curr = first;
-    for(int i=0;i<index && i<size;i++){
+    for(int i=0;i < index-1; i++){
       curr = curr->next;
     }
-    //FINISH THIS!!
-    return true;
+    DroneRecord* temp = curr->next;
+    curr->next = value; // value is DroneRecord object with prev, next
+    value->next = temp->next;
+    value->prev = curr; // set value to point to original index passed in previous and next
+    value->next->prev = value;
   }
 }
 
